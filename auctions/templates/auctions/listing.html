@@ -1,5 +1,33 @@
-{% extends 'auctions/layout.html' %}
+{% extends "auctions/layout.html" %}
 
-{% block body %}
+{% block content %}
+<h2>{{ listing.title }}</h2>
+<p>{{ listing.description }}</p>
+<p>Starting Bid: ${{ listing.starting_price }}</p>
+{% if listing.image %}
+<img src="{{ listing.image }}" alt="{{ listing.title }}" />
+{% endif %}
+{% if listing.category %}
+<p>Category: {{ listing.category.name }}</p>
+{% endif %}
 
+<h3>Bids</h3>
+{% for bid in bids %}
+<p>{{ bid.user }} bid ${{ bid.bid_amount }}</p>
+{% empty %}
+<p>No bids yet.</p>
+{% endfor %}
+
+<h3>Comments</h3>
+{% for comment in comments %}
+<p>{{ comment.user }}: {{ comment.content }}</p>
+{% empty %}
+<p>No comments yet.</p>
+{% endfor %}
+
+{% if is_on_watchlist %}
+<p>This item is on your watchlist.</p>
+{% else %}
+<p>This item is not on your watchlist.</p>
+{% endif %}
 {% endblock %}

@@ -22,7 +22,7 @@ class Listing(models.Model):
     )
     title = models.CharField(max_length=1000)
     description = models.TextField(max_length=1000)
-    image = models.URLField(null=True, blank=True, max_length=250)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     starting_price = models.DecimalField(
         decimal_places=2, max_digits=10, default=1.00)
     current_price = models.DecimalField(
@@ -30,6 +30,9 @@ class Listing(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Bid(models.Model):

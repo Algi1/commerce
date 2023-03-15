@@ -1,6 +1,6 @@
-from django.urls import path
-
 from . import views
+from django.urls import path
+app_name = "auctions"
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -8,4 +8,5 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("create/", views.create_listing, name='create'),
+    path('listing/<int:listing_id>/', views.listing, name='listing'),
 ]
